@@ -14,11 +14,15 @@ import os, subprocess, sys
 
 from . import utf8
 
+versionned_clang = 'clang++'
+if "CLDOC_CLANG_VERSION" in os.environ:
+    versionned_clang = 'clang++-' + os.environ["CLDOC_CLANG_VERSION"]
+
 def flags(f):
     devnull = open(os.devnull)
 
     try:
-        p = subprocess.Popen(['clang++', '-E', '-xc++'] + f + ['-v', '-'],
+        p = subprocess.Popen([versionned_clang, '-E', '-xc++'] + f + ['-v', '-'],
                              stdin=devnull,
                              stdout=subprocess.PIPE,
                              stderr=subprocess.PIPE)

@@ -15,6 +15,7 @@
 from .clang import cindex
 import tempfile
 import functools
+import os
 
 from .defdict import Defdict
 
@@ -54,6 +55,9 @@ if platform.system() == 'Darwin':
             cindex.Config.set_library_file(lname)
 else:
     versions = [None, '7.0', '6.0', '5.0', '4.0', '3.9', '3.8', '3.7', '3.6', '3.5', '3.4', '3.3', '3.2']
+
+    if "CLDOC_CLANG_VERSION" in os.environ:
+        versions = [None , os.environ["CLDOC_CLANG_VERSION"] ]
 
     for v in versions:
         name = 'clang'
