@@ -65,7 +65,9 @@ else:
         if not v is None:
             name += '-' + v
 
+        print( name )
         lname = find_library(name)
+        print( lname );
 
         if not lname is None:
             cindex.Config.set_library_file(lname)
